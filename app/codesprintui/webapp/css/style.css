@@ -15,4 +15,12 @@
 .sapMObjStatusError .sapMObjStatusText {
     background-color: bisque;
 }
-.sa
+.codeprintClass{
+  font-size: xx-large;
+}
+.textfontsize{
+  font-size: large;
+}
+.sapUiSizeCompact .sapMSLI {
+    height: 3rem;
+}
