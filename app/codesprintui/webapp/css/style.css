@@ -1,0 +1,18 @@
+.HeaderBackground{
+}
+.highPriority{
+}
+.mediumPriority{
+    
+}
+.lowPriority{
+  
+}
+.card {
+  width: 23%;
+  margin: 1%;
+}
+.sapMObjStatusError .sapMObjStatusText {
+    background-color: bisque;
+}
+.sa

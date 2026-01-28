@@ -1,0 +1,177 @@
+<mvc:View controllerName="con.olamagri.codesprintui.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:layout="sap.ui.layout"
+  xmlns:core="sap.ui.core">
+
+    <Page id="page" title="{i18n>title}" showHeader="false">
+    <!-- <GenericTile header="Lines of Code"
+             subheader="Total scanned"
+             frameType="TwoByOne">
+  <TileContent>
+    <NumericContent
+      value="{linesOfCode}"
+      scale="M"
+      valueColor="Good"/>
+  </TileContent>
+</GenericTile>
+
+<VBox class="sapUiSmallMargin">
+  <ObjectStatus text="High Priority" state="Error"/>
+  <ProgressIndicator percentValue="30" state="Error"/>
+
+  <ObjectStatus text="Medium Priority" state="Warning"/>
+  <ProgressIndicator percentValue="50" state="Warning"/>
+
+  <ObjectStatus text="Low Priority" state="Success"/>
+  <ProgressIndicator percentValue="20" state="Success"/>
+</VBox>
+
+<ProgressIndicator
+  percentValue="{autoFixCoverage}"
+  displayValue="Auto-fix Coverage 68%"
+  state="Success"/> -->
+  <content>
+
+      <!-- ================= HEADER ================= -->
+       <Panel  backgroundDesign="Transparent"></Panel>
+      <Panel stickyHeader="true" class="HeaderBackground">
+      <VBox class="sapUiSmallMargin HeaderBackground" >
+        <HBox
+          justifyContent="SpaceBetween"
+          alignItems="Center"
+          class="sapUiMediumPadding sapUiContentPadding sapUiResponsiveContentPadding sapUiShadowLevel1">
+
+          <!-- Left Title -->
+          <HBox alignItems="Center" gap="0.75rem">
+            <Avatar
+              src="sap-icon://chevron-phase-2"
+              backgroundColor="Accent4" displayShape="Square" 
+              displaySize="L" />
+            <VBox>
+              <Title text="CodeSprint" level="H1" />
+              <Text text="Accelerate your ECC to S/4HANA conversion journey" />
+            </VBox>
+          </HBox>
+
+          <!-- Right Actions -->
+          <HBox gap="0.5rem">
+            <Button text="Start Scan" type="Emphasized" icon="sap-icon://play" />
+            <Button text="Export Excel" type="Success" icon="sap-icon://excel-attachment" />
+            <Button text="Email Report" icon="sap-icon://email" />
+          </HBox>
+
+        </HBox>
+      </VBox>
+      </Panel>
+      <Panel  backgroundDesign="Transparent"></Panel>
+
+      <!-- ================= KPI CARDS ================= -->
+      <Panel>
+      <layout:Grid binding="{path: '/ScanSummary'}"
+        defaultSpan="XL3 L3 M6 S12"
+        class="sapUiMediumMarginTop sapUiMediumMarginBeginEnd">
+
+        <GenericTile header="Total Packages" mode="ContentMode" frameType="OneByHalf" width="85%" valueColor="Critical" press="onTilePress">
+          <TileContent>
+            <NumericContent value="{totalPackages}" icon="sap-icon://product" valueColor="None" />
+          </TileContent>
+        </GenericTile>
+
+        <GenericTile header="Lines of Code" frameType="OneByHalf" width="85%" valueColor="Neutral">
+          <TileContent>
+            <NumericContent value="{linesOfCode}" icon="sap-icon://document-text" />
+          </TileContent>
+        </GenericTile>
+
+        <GenericTile header="Issues Found" frameType="OneByHalf" width="85%" valueColor="Error">
+          <TileContent>
+            <NumericContent value="{issuesFound}" icon="sap-icon://alert" />
+          </TileContent>
+        </GenericTile>
+
+        <GenericTile header="Scan Duration" frameType="OneByHalf" width="85%" valueColor="Good">
+          <TileContent>
+            <NumericContent value="{scanDuration}m" icon="sap-icon://fob-watch" formatterValue="true" />
+          </TileContent>
+        </GenericTile>
+
+      </layout:Grid>
+      </Panel>
+       <Panel  backgroundDesign="Transparent"></Panel>
+      <!-- ================= LOWER CARDS ================= -->
+
+      <Panel>
+      <layout:Grid
+        defaultSpan="XL6 L6 M12 S12" position="Left"
+        class="sapUiMediumMargin">
+
+        <!-- Priority Breakdown -->
+        <VBox class="sapUiMediumPadding sapUiShadowLevel1">
+          <HBox alignItems="Center" gap="0.5rem">
+            <core:Icon src="sap-icon://message-warning" color="orange" />
+            <Title text="Priority Breakdown" level="H4" />
+          </HBox>
+
+          <List  items="{path: '/PriorityBreakdown'}">
+            <StandardListItem
+              title="High Priority"
+              info="{highPriority}"
+              infoState="Error"
+              icon="sap-icon://high-priority" />
+           </List>
+          <List  items="{path: '/PriorityBreakdown'}">
+            <StandardListItem
+              title="Medium Priority"
+              info="{mediumPriority}"
+              infoState="Warning"
+              icon="sap-icon://status-inactive"/>
+           </List>
+            <List  items="{path: '/PriorityBreakdown'}">
+            <StandardListItem
+              title="Low Priority"
+              info="{lowPriority}"
+              infoState="Information"
+              icon="sap-icon://status-positive"/>
+          </List>
+        </VBox>
+
+        <!-- Remediation Strategy -->
+        <VBox class="sapUiMediumPadding sapUiShadowLevel1">
+          <HBox alignItems="Center" gap="0.5rem">
+            <core:Icon src="sap-icon://sys-enter" color="green" />
+            <Title text="Remediation Strategy" level="H4" />
+          </HBox>
+
+          <List  items="{path: '/Remediation'}">
+            <StandardListItem
+              title="Automatic Remediation"
+              info="{automaticCount}"
+              infoState="Success"
+              icon="sap-icon://process" />
+          </List>
+          <List  items="{path: '/Remediation'}" updateFinished="onUpdateFinished">
+            <StandardListItem
+              title="Manual Remediation"
+              info="{manualCount}"
+              infoState="Information"
+              icon="sap-icon://user-edit" />
+          </List>
+
+          <VBox class="sapUiSmallMarginTop">
+            <Title text="Auto-fix Coverage" level="H1" />
+            <VBox  items="{path: '/Remediation'}">
+            <ProgressIndicator 
+              percentValue="{autoFixCoverage}"
+              displayValue="{autoFixCoverage}%"
+              state="{path:'autoFixCoverage', formatter:'.formatter.getType'}" />
+              </VBox>
+          </VBox>
+        </VBox>
+
+      </layout:Grid>
+       </Panel>
+      <Panel  backgroundDesign="Transparent"></Panel>
+    </content>
+    </Page>
+</mvc:View>

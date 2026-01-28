@@ -1,0 +1,234 @@
+<mvc:View controllerName="con.olamagri.codesprintui.controller.LineOfBusinessProgress"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:layout="sap.ui.layout"
+  xmlns:core="sap.ui.core">
+    <Page showNavButton="true" navButtonPress="onBackPage">
+  <VBox class="sapUiMediumMargin">
+
+    <!-- ================= HEADER ================= -->
+    <HBox alignItems="Center" gap="0.75rem">
+    <Avatar src="sap-icon://customer-and-supplier" backgroundColor="Accent4" displayShape="Square" displaySize="S" />
+    <Title text="Line of Business Progress" level="H1" />
+    </HBox>
+
+    <!-- ================= CARDS GRID ================= -->
+    <layout:Grid defaultSpan="XL3 L3 M6 S12" class="sapUiMediumMarginTop">
+
+     
+
+      <!-- ===== COPY SAME PANEL FOR OTHER LOBs ===== -->
+
+      <Panel class="sapUiShadowLevel1 sapUiSmallMargin" content="{path: '/Finance'}">
+        <VBox >
+          <HBox justifyContent="SpaceBetween">
+            <Title text="Finance" level="H5"/>
+            <ObjectStatus text="H" state="Error"/>
+          </HBox>
+          <HBox justifyContent="SpaceBetween" class="sapUiSmallMarginTop">
+            <Text text="Progress"/>
+            <Text text="{progress}%"/>
+          </HBox>
+          <ProgressIndicator percentValue="{progress}" showValue="false" state="Information"/>
+          <VBox class="sapUiSmallMarginTop">
+            <HBox justifyContent="SpaceBetween"><Text text="Resolved"/><Text text="{resolved}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="In Progress"/><Text text="{inProgress}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="Pending"/><Text text="{pending}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="Total"/><Text text="{total}"/></HBox>
+          </VBox>
+        </VBox>          
+      </Panel>
+
+       <!-- ===== CARD TEMPLATE (Finance example) ===== -->
+      <Panel class="sapUiShadowLevel1 sapUiSmallMargin" content="{path: '/Materials'}">
+        <VBox>
+          <!-- Title + Priority -->
+          <HBox justifyContent="SpaceBetween" alignItems="Center">
+            <Title text="Materials" level="H5"/>
+            <ObjectStatus text="H" state="Error"/>
+          </HBox>
+          <!-- Progress -->
+         <HBox justifyContent="SpaceBetween" class="sapUiSmallMarginTop">
+            <Text text="Progress"/>
+            <Text text="{progress}%"/>
+          </HBox>
+          <ProgressIndicator percentValue="{progress}" showValue="false" state="Information"/>
+          <VBox class="sapUiSmallMarginTop">
+            <HBox justifyContent="SpaceBetween"><Text text="Resolved"/><Text text="{resolved}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="In Progress"/><Text text="{inProgress}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="Pending"/><Text text="{pending}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="Total"/><Text text="{total}"/></HBox>
+          </VBox>
+        </VBox>
+      </Panel>
+
+       <Panel class="sapUiShadowLevel1 sapUiSmallMargin" content="{path: '/Sales'}">
+        <VBox>
+          <!-- Title + Priority -->
+          <HBox justifyContent="SpaceBetween" alignItems="Center">
+            <Title text="Sales" level="H5"/>
+            <ObjectStatus text="H" state="Error"/>
+          </HBox>
+          <!-- Progress -->
+         <HBox justifyContent="SpaceBetween" class="sapUiSmallMarginTop">
+            <Text text="Progress"/>
+            <Text text="{progress}%"/>
+          </HBox>
+          <ProgressIndicator percentValue="{progress}" showValue="false" state="Information"/>
+          <VBox class="sapUiSmallMarginTop">
+            <HBox justifyContent="SpaceBetween"><Text text="Resolved"/><Text text="{resolved}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="In Progress"/><Text text="{inProgress}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="Pending"/><Text text="{pending}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="Total"/><Text text="{total}"/></HBox>
+          </VBox>
+        </VBox>
+       </Panel>
+
+      <Panel class="sapUiShadowLevel1 sapUiSmallMargin" content="{path: '/Controlling'}">
+        <VBox>
+          <!-- Title + Priority -->
+          <HBox justifyContent="SpaceBetween" alignItems="Center">
+            <Title text="Controlling" level="H5"/>
+            <ObjectStatus text="H" state="Error"/>
+          </HBox>
+          <!-- Progress -->
+         <HBox justifyContent="SpaceBetween" class="sapUiSmallMarginTop">
+            <Text text="Progress"/>
+            <Text text="{progress}%"/>
+          </HBox>
+          <ProgressIndicator percentValue="{progress}" showValue="false" state="Information"/>
+          <VBox class="sapUiSmallMarginTop">
+            <HBox justifyContent="SpaceBetween"><Text text="Resolved"/><Text text="{resolved}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="In Progress"/><Text text="{inProgress}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="Pending"/><Text text="{pending}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="Total"/><Text text="{total}"/></HBox>
+          </VBox>
+        </VBox>
+      </Panel>
+
+      <Panel class="sapUiShadowLevel1 sapUiSmallMargin" content="{path: '/Human'}">
+        <VBox>
+          <!-- Title + Priority -->
+          <HBox justifyContent="SpaceBetween" alignItems="Center">
+            <Title text="Human" level="H5"/>
+            <ObjectStatus text="H" state="Error"/>
+          </HBox>
+          <!-- Progress -->
+         <HBox justifyContent="SpaceBetween" class="sapUiSmallMarginTop">
+            <Text text="Progress"/>
+            <Text text="{progress}%"/>
+          </HBox>
+          <ProgressIndicator percentValue="{progress}" showValue="false" state="Information"/>
+          <VBox class="sapUiSmallMarginTop">
+            <HBox justifyContent="SpaceBetween"><Text text="Resolved"/><Text text="{resolved}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="In Progress"/><Text text="{inProgress}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="Pending"/><Text text="{pending}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="Total"/><Text text="{total}"/></HBox>
+          </VBox>
+        </VBox>
+      </Panel>
+
+      <Panel class="sapUiShadowLevel1 sapUiSmallMargin" content="{path: '/Production'}">
+        <VBox>
+          <!-- Title + Priority -->
+          <HBox justifyContent="SpaceBetween" alignItems="Center">
+            <Title text="Production" level="H5"/>
+            <ObjectStatus text="H" state="Error"/>
+          </HBox>
+          <!-- Progress -->
+         <HBox justifyContent="SpaceBetween" class="sapUiSmallMarginTop">
+            <Text text="Progress"/>
+            <Text text="{progress}%"/>
+          </HBox>
+          <ProgressIndicator percentValue="{progress}" showValue="false" state="Information"/>
+          <VBox class="sapUiSmallMarginTop">
+            <HBox justifyContent="SpaceBetween"><Text text="Resolved"/><Text text="{resolved}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="In Progress"/><Text text="{inProgress}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="Pending"/><Text text="{pending}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="Total"/><Text text="{total}"/></HBox>
+          </VBox>
+        </VBox>
+      </Panel>
+
+      <Panel class="sapUiShadowLevel1 sapUiSmallMargin" content="{path: '/Quality'}">
+        <VBox>
+          <!-- Title + Priority -->
+          <HBox justifyContent="SpaceBetween" alignItems="Center">
+            <Title text="Quality" level="H5"/>
+            <ObjectStatus text="H" state="Error"/>
+          </HBox>
+          <!-- Progress -->
+         <HBox justifyContent="SpaceBetween" class="sapUiSmallMarginTop">
+            <Text text="Progress"/>
+            <Text text="{progress}%"/>
+          </HBox>
+          <ProgressIndicator percentValue="{progress}" showValue="false" state="Information"/>
+          <VBox class="sapUiSmallMarginTop">
+            <HBox justifyContent="SpaceBetween"><Text text="Resolved"/><Text text="{resolved}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="In Progress"/><Text text="{inProgress}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="Pending"/><Text text="{pending}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="Total"/><Text text="{total}"/></HBox>
+          </VBox>
+        </VBox>
+      </Panel>
+
+      <Panel class="sapUiShadowLevel1 sapUiSmallMargin" content="{path: '/Others'}">
+        <VBox>
+          <!-- Title + Priority -->
+          <HBox justifyContent="SpaceBetween" alignItems="Center">
+            <Title text="Others" level="H5"/>
+            <ObjectStatus text="H" state="Error"/>
+          </HBox>
+          <!-- Progress -->
+         <HBox justifyContent="SpaceBetween" class="sapUiSmallMarginTop">
+            <Text text="Progress"/>
+            <Text text="{progress}%"/>
+          </HBox>
+          <ProgressIndicator percentValue="{progress}" showValue="false" state="Information"/>
+          <VBox class="sapUiSmallMarginTop">
+            <HBox justifyContent="SpaceBetween"><Text text="Resolved"/><Text text="{resolved}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="In Progress"/><Text text="{inProgress}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="Pending"/><Text text="{pending}"/></HBox>
+            <HBox justifyContent="SpaceBetween"><Text text="Total"/><Text text="{total}"/></HBox>
+          </VBox>
+        </VBox>
+      </Panel>
+
+    </layout:Grid>
+
+    <!-- ================= FOOTER SUMMARY ================= -->
+    <layout:Grid defaultSpan="XL3 L3 M6 S12" class="sapUiMediumMarginTop                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ">
+
+      <Panel class="sapUiShadowLevel1">
+        <VBox alignItems="Center">
+          <Text text="Avg Progress"/>
+          <Title text="{footer>/avgProgress}%" level="H3"/>
+        </VBox>
+      </Panel>
+
+      <Panel class="sapUiShadowLevel1">
+        <VBox alignItems="Center">
+          <Text text="Resolved"/>
+          <Title text="{footer>/resolved}" level="H3" class="sapThemePositiveText"/>
+        </VBox>
+      </Panel>
+
+      <Panel class="sapUiShadowLevel1">
+        <VBox alignItems="Center">
+          <Text text="In Progress"/>
+          <Title  text="{footer>/inProgress}" level="H3"/>
+        </VBox>
+      </Panel>
+
+      <Panel class="sapUiShadowLevel1">
+        <VBox alignItems="Center">
+          <Text text="Pending"/>
+          <Title text="{footer>/pending}" level="H3"/>
+        </VBox>
+      </Panel>
+
+    </layout:Grid>
+
+  </VBox>
+  </Page>
+</mvc:View>
