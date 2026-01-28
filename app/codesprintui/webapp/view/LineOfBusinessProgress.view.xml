@@ -3,11 +3,12 @@
   xmlns="sap.m"
   xmlns:layout="sap.ui.layout"
   xmlns:core="sap.ui.core">
-    <Page showNavButton="true" navButtonPress="onBackPage">
+    <Page showNavButton="false" navButtonPress="onBackPage">
   <VBox class="sapUiMediumMargin">
 
     <!-- ================= HEADER ================= -->
     <HBox alignItems="Center" gap="0.75rem">
+    <Button press="onBackPage" icon="sap-icon://navigation-left-arrow" type="Emphasized"/>
     <Avatar src="sap-icon://customer-and-supplier" backgroundColor="Accent4" displayShape="Square" displaySize="S" />
     <Title text="Line of Business Progress" level="H1" />
     </HBox>

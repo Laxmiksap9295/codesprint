@@ -45,7 +45,7 @@
           <!-- Left Title -->
           <HBox alignItems="Center" gap="0.75rem">
             <Avatar
-              src="sap-icon://chevron-phase-2"
+              src="sap-icon://bbyd-dashboard"
               backgroundColor="Accent4" displayShape="Square" 
               displaySize="L" />
             <VBox>
