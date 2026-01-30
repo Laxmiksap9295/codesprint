@@ -56,9 +56,9 @@
 
           <!-- Right Actions -->
           <HBox gap="0.5rem">
-            <Button text="Start Scan" type="Emphasized" icon="sap-icon://play" />
-            <Button text="Export Excel" type="Success" icon="sap-icon://download" />
-            <Button text="Email Report" type="Emphasized" icon="sap-icon://email" />
+            <Button text="Start Scan" type="Emphasized" icon="sap-icon://play" press="onStartScanPress"/>
+            <Button text="Export Excel" type="Success" icon="sap-icon://download" press="onExportPress" />
+            <Button text="Email Report" type="Emphasized" icon="sap-icon://email" press="onEmailReportPress" />
           </HBox>
 
         </HBox>

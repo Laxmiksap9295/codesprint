@@ -83,6 +83,14 @@
           "autoExpandSelect": true,
           "earlyRequests": true
         }
+      },
+      "codesprintMainModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "preload": true
+      },
+      "LineofBusinessModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "preload": true
       }
     },
     "resources": {
@@ -124,10 +132,10 @@
           "name": "View1",
           "viewType": "XML"
         },
-        "LineOfBusinessProgress":{
+        "LineOfBusinessProgress": {
           "id": "LineOfBusinessProgress",
           "name": "LineOfBusinessProgress",
-           "viewType": "XML"
+          "viewType": "XML"
         }
       }
     },

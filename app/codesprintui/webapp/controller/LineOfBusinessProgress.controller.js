@@ -1,7 +1,8 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "con/olamagri/codesprintui/model/formatter"
-], (Controller, formatter) => {
+    "con/olamagri/codesprintui/model/formatter",
+    "sap/m/BusyDialog"
+], (Controller, formatter, BusyDialog) => {
     "use strict";
 
     return Controller.extend("con.olamagri.codesprintui.controller.LineOfBusinessProgress", {
@@ -13,7 +14,12 @@ sap.ui.define([
             this.getView().setModel(oBusinessModel);
             // this.getView().bindElement("/Finance");
             // this.getView().bindElement("/Materials");
+            this.getOwnerComponent().getRouter().attachRoutePatternMatched(this._onObjectMatched, this);
+        },
 
+        _onObjectMatched: function (oEvent) {
+            this.BusyDialog = new BusyDialog();
+            this.BusyDialog.open();
             const oModel = this.getView().getModel();
 
             const aPaths = [
@@ -52,7 +58,10 @@ sap.ui.define([
                 });
 
                 this.getView().setModel(oFooterModel, "footer");
+                this.getOwnerComponent().getModel("LineofBusinessModel").setData(oFooterModel.getData());
+                this.BusyDialog.close();
             });
+            //  this.getOwnerComponent().getModel("LineofBusinessModel").setData(oFooterModel.getData());
         },
 
         onBackPage: function (oEvent) {
