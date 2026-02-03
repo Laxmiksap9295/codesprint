@@ -2,8 +2,10 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "con/olamagri/codesprintui/model/formatter",
     "sap/m/BusyDialog",
-    "sap/m/MessageBox"
-], (Controller, formatter, BusyDialog, MessageBox) => {
+    "sap/m/MessageBox",
+    "sap/ndc/BarcodeScanner",
+    "sap/ui/model/json/JSONModel"
+], (Controller, formatter, BusyDialog, MessageBox, BarcodeScanner, JSONModel) => {
     "use strict";
 
     return Controller.extend("con.olamagri.codesprintui.controller.View1", {
@@ -68,8 +70,20 @@ sap.ui.define([
             this.SelectdBtn = "";
             this.exportDialog = new sap.m.Dialog({
                 title: "Export Data",
-                type: "Message",
+                type: "Standard",
+                draggable: true,
+                resizable: true,
+                stretch: false,
+                titleAlignment: "Center",
                 content: [
+                    new sap.m.VBox({
+                        alignItems: "Start",
+                        items:[
+                    new sap.m.Label(),
+                    new sap.m.Label({
+                        text: "Please Choose the option below what Data you want Download"
+                    }),
+                    new sap.m.Label(),
                     new sap.m.RadioButton({
                         text: "Main Status Data",
                         selected: false,
@@ -94,6 +108,9 @@ sap.ui.define([
                             this.SelectdBtn = RBtn.getSource().getText();
                         }.bind(this)
                     })
+                        ]
+                    }),
+                   
 
                 ],
                 beginButton: new sap.m.Button({
@@ -166,7 +183,7 @@ sap.ui.define([
                                 }
                             }
                         } else {
-                            MessageBox.error("Please select atleast one...");
+                            MessageBox.information("Please select atleast one...");
                             return;
                         }
                         this.exportDialog.close();
@@ -206,6 +223,125 @@ sap.ui.define([
             //     sap.m.MessageToast.show("No Data...");
             // }
 
-        }
+        },
+        onStartScanPress: function (oEvent) {
+            BarcodeScanner.scan(
+                function (mResults) {
+                    if (!mResults.cancelled) {
+                        // oThat.onScanBarcode(mResult.text.trim());
+                    }
+
+                },
+                function (Error) {
+                    sap.m.MessageToast("Barcode Scan Failred" + " " + Error);
+                },
+                function (mParams) {
+                    alert("Value entered: " + mParams.newValue);
+                },
+                "Enter Product Barcode",
+                true,
+                30,
+                1,
+                false,
+                false
+            );
+        },
+        loadZXingLibrary: function () {
+            return new Promise((resolve, reject) => {
+                var script = document.createElement('script');
+                //script.src = "https://unpkg.com/@zxing/library@latest";
+                script.src = sap.ui.require.toUrl("ZGT_MM_INBOUND/ScannerAppLibrary/index.min.js");
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+        },
+
+        // we need to install ZXing libraries , if we run the below scanner
+        onStartScanPress1: function () {
+
+            var oThat = this;
+            var oBundle = oThat.getView().getModel("i18n").getResourceBundle();
+            var oVideoDeviceModel = new JSONModel();
+            //Initialize the ZXing QR Code Scanner
+            if (ZXing !== undefined) {
+                // if (!sap.ui.Device.system.desktop) { //Other than desktop
+                this.loadZXingLibrary().then(() => {
+                    codeReader = new ZXing.BrowserMultiFormatReader();
+                    codeReader.listVideoInputDevices().then((videoInputDevices) => {
+                        if (videoInputDevices.length > 1) {
+                            selectedDeviceId = videoInputDevices[1].deviceId; //Mobile Back Camera
+                        } else if (videoInputDevices.length === 1) {
+                            selectedDeviceId = videoInputDevices[0].deviceId; //Default Camera
+                        } else { //Desktop Version
+                            sap.ndc.BarcodeScanner.scan(
+                                function (mResult) {
+                                    if (!mResult.cancelled) {
+                                        oThat.onScanBarcode(mResult.text.trim());
+                                    }
+                                },
+                                function (Error) {
+                                    sap.m.MessageToast(oBundle.getText("ScanningFailed") + " " + Error);
+
+                                },
+                            );
+                        }
+                        if (videoInputDevices.length >= 1) {
+                            var aDevice = [];
+                            videoInputDevices.forEach((element) => {
+                                var sourceOption = {};
+                                sourceOption.text = element.label;
+                                sourceOption.value = element.deviceId;
+                                aDevice.push(sourceOption);
+                                oVideoDeviceModel.setData(aDevice);
+                                this.getView().setModel(oVideoDeviceModel, "oVideoDeviceModel");
+                                oComboBox = new sap.m.ComboBox({
+                                    items: {
+                                        path: "oVideoDeviceModel>/",
+                                        template: new sap.ui.core.Item({
+                                            key: "{oVideoDeviceModel>value}",
+                                            text: "{oVideoDeviceModel>text}"
+                                        })
+                                    },
+                                    selectedKey: selectedDeviceId,
+                                    selectionChange: function (oEvt) {
+                                        selectedDeviceId = oEvt.getSource().getSelectedKey();
+                                        oThat._oScanQRDialog.close();
+                                        codeReader.reset()
+
+                                    }
+                                });
+
+                                sStartBtn = new sap.m.Button({
+                                    text: oBundle.getText("Start"),
+                                    type: oBundle.getText("Accept"),
+                                    press: function () {
+                                        oThat._oScanQRDialog.close();
+                                        oThat.fnScanWB();
+                                    }
+
+                                })
+
+                                oThat.startScanning();
+                            })
+                        }
+                    });
+                }).catch((error) => {
+                    console.error("Error loading ZXing library:", error);
+                });
+            } else {
+                sap.ndc.BarcodeScanner.scan(
+                    function (mResult) {
+                        if (!mResult.cancelled) {
+                            oThat.onScanBarcode(mResult.text.trim());
+                        }
+                    },
+                    function (Error) {
+                        sap.m.MessageToast(oBundle.getText("ScanningFailed") + " " + Error);
+                    },
+                );
+            }
+        },
+
     });
 });
