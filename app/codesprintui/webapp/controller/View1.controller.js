@@ -16,6 +16,7 @@ sap.ui.define([
             });
             this.getView().setModel(oModel);
             this.getOwnerComponent().getModel("codesprintMainModel").setData(oModel.oData);
+            this._loadExternalData();
             // this.byId("id_PriorityBreakDown").bindElement("/PriorityBreakdown");
             // this.byId("id_Remediation").bindElement("/Remediation");
 
@@ -58,9 +59,6 @@ sap.ui.define([
             //  this.getOwnerComponent().getModel("LineofBusinessModel").setData(oFooterModel.getData());
 
         },
-        onUpdateFinished: function (oEvent) {
-            debugger;
-        },
         onTilePress: function (oEvent) {
             debugger;
             this.getOwnerComponent().getRouter().navTo("LineOfBusinessProgress");
@@ -74,15 +72,15 @@ sap.ui.define([
                 draggable: true,
                 resizable: true,
                 stretch: false,
-                contentWidth:"30rem",
-                icon:"sap-icon://download",
+                contentWidth: "30rem",
+                icon: "sap-icon://download",
                 escapeHandler: function (escapeHandler) {
                     debugger;
                     if (this._bHasUnsavedChanges) {
                         // block ESC
                         oPromise.resolve();
                     } else {
-                       // this.close();
+                        // this.close();
                         oPromise.resolve();
                     }
                 }.bind(this),
@@ -90,39 +88,39 @@ sap.ui.define([
                 content: [
                     new sap.m.VBox({
                         alignItems: "Start",
-                        items:[
-                    new sap.m.Label(),
-                    new sap.m.Label({
-                        text: "Please Choose the option below what Data you want Download..."
-                    }),
-                    new sap.m.Label(),
-                    new sap.m.RadioButton({
-                        text: "Main Status Data",
-                        selected: false,
-                        select: function (RBtn) {
-                            debugger;
-                            this.SelectdBtn = RBtn.getSource().getText();
-                        }.bind(this)
-                    }),
-                    new sap.m.RadioButton({
-                        text: "Priority BreakDown",
-                        selected: false,
-                        select: function (RBtn) {
-                            debugger;
-                            this.SelectdBtn = RBtn.getSource().getText();
-                        }.bind(this)
-                    }),
-                    new sap.m.RadioButton({
-                        text: "Remediation Strategy",
-                        selected: false,
-                        select: function (RBtn) {
-                            debugger;
-                            this.SelectdBtn = RBtn.getSource().getText();
-                        }.bind(this)
-                    })
+                        items: [
+                            new sap.m.Label(),
+                            new sap.m.Label({
+                                text: "Please Choose the option below what Data you want Download..."
+                            }),
+                            new sap.m.Label(),
+                            new sap.m.RadioButton({
+                                text: "Main Status Data",
+                                selected: false,
+                                select: function (RBtn) {
+                                    debugger;
+                                    this.SelectdBtn = RBtn.getSource().getText();
+                                }.bind(this)
+                            }),
+                            new sap.m.RadioButton({
+                                text: "Priority BreakDown",
+                                selected: false,
+                                select: function (RBtn) {
+                                    debugger;
+                                    this.SelectdBtn = RBtn.getSource().getText();
+                                }.bind(this)
+                            }),
+                            new sap.m.RadioButton({
+                                text: "Remediation Strategy",
+                                selected: false,
+                                select: function (RBtn) {
+                                    debugger;
+                                    this.SelectdBtn = RBtn.getSource().getText();
+                                }.bind(this)
+                            })
                         ]
                     }),
-                   
+
 
                 ],
                 beginButton: new sap.m.Button({
@@ -355,5 +353,58 @@ sap.ui.define([
             }
         },
 
+        _loadExternalData() {
+            debugger;
+            // $.ajax({
+            //     url: "https://App-Matcher-daring-buffalo-bv.cfapps.us10-001.hana.ondemand.com/match_app",
+            //     type: "POST",
+            //     contentType: "application/json",
+            //     data: JSON.stringify([
+            //         {
+            //             "Description": "Brazil"
+            //         }
+            //     ]),
+            //     success: function (response) {
+            //         console.log("Success:", response);
+            //     },
+            //     error: function (xhr, status, error) {
+            //         console.error("Error:", error);
+            //         console.log("Response:", xhr.responseText);
+            //     }
+            // });
+
+            var Data_CFM =
+                [{
+                    "Description": "Brazil"
+                }];
+
+            var settings = {
+                "url": "https://App-Matcher-daring-buffalo-bv.cfapps.us10-001.hana.ondemand.com/match_app",
+                "method": "POST",
+                "headers": {
+                    "Content-Type": "text/plain",
+                },
+                "data": JSON.stringify([
+                    {
+                        "Description": "Brazil"
+                    }
+                ]),
+            };
+
+            jQuery.ajax(settings).done(function (response) {
+                debugger;
+                console.log("Success:", response);
+            }).error(function(oerror){
+                debugger;
+                console.log("Failed:", oerror);
+            });
+            
+        }
+
+
+
+
+
     });
+
 });

@@ -25,73 +25,82 @@ entity Remediation {
 }
 
 entity Finance {
-    key ID  : UUID;
-        resolved    : Integer;
-        inProgress  : Integer;
-        pending     : Integer;
-        progress    : Integer;
-        total       : Integer;
+    key ID         : UUID;
+        resolved   : Integer;
+        inProgress : Integer;
+        pending    : Integer;
+        progress   : Integer;
+        total      : Integer;
 }
 
 entity Materials {
-    key ID  : UUID;
-        resolved    : Integer;
-        inProgress  : Integer;
-        pending     : Integer;
-        progress    : Integer;
-        total       : Integer;
+    key ID         : UUID;
+        resolved   : Integer;
+        inProgress : Integer;
+        pending    : Integer;
+        progress   : Integer;
+        total      : Integer;
 }
 
 entity Sales {
-    key ID  : UUID;
-        resolved    : Integer;
-        inProgress  : Integer;
-        pending     : Integer;
-        progress    : Integer;
-        total       : Integer;
+    key ID         : UUID;
+        resolved   : Integer;
+        inProgress : Integer;
+        pending    : Integer;
+        progress   : Integer;
+        total      : Integer;
 }
 
 entity Controlling {
-    key ID  : UUID;
-        resolved    : Integer;
-        inProgress  : Integer;
-        pending     : Integer;
-        progress    : Integer;
-        total       : Integer;
+    key ID         : UUID;
+        resolved   : Integer;
+        inProgress : Integer;
+        pending    : Integer;
+        progress   : Integer;
+        total      : Integer;
 }
 
 entity Human {
-    key ID  : UUID;
-        resolved    : Integer;
-        inProgress  : Integer;
-        pending     : Integer;
-        progress    : Integer;
-        total       : Integer;
+    key ID         : UUID;
+        resolved   : Integer;
+        inProgress : Integer;
+        pending    : Integer;
+        progress   : Integer;
+        total      : Integer;
 }
 
 entity Production {
-    key ID  : UUID;
-        resolved    : Integer;
-        inProgress  : Integer;
-        pending     : Integer;
-        progress    : Integer;
-        total       : Integer;
+    key ID         : UUID;
+        resolved   : Integer;
+        inProgress : Integer;
+        pending    : Integer;
+        progress   : Integer;
+        total      : Integer;
 }
 
 entity Quality {
-    key ID  : UUID;
-        resolved    : Integer;
-        inProgress  : Integer;
-        pending     : Integer;
-        progress    : Integer;
-        total       : Integer;
+    key ID         : UUID;
+        resolved   : Integer;
+        inProgress : Integer;
+        pending    : Integer;
+        progress   : Integer;
+        total      : Integer;
 }
 
 entity Others {
-    key ID  : UUID;
-        resolved    : Integer;
-        inProgress  : Integer;
-        pending     : Integer;
-        progress    : Integer;
-        total       : Integer;
+    key ID         : UUID;
+        resolved   : Integer;
+        inProgress : Integer;
+        pending    : Integer;
+        progress   : Integer;
+        total      : Integer;
+}
+
+entity LineOfBusiness {
+    key ID         : UUID;
+        name       : String;
+        progress   : Integer;
+        resolved   : Integer;
+        inProgress : Integer;
+        pending    : Integer;
 }

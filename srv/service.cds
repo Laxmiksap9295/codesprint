@@ -12,5 +12,6 @@ service DashboardService {
     entity Production        as projection on db.Production;
     entity Quality           as projection on db.Quality;
     entity Others            as projection on db.Others;
+    entity LineOfBusiness    as projection on db.LineOfBusiness;
 
 }
