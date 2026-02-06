@@ -74,6 +74,18 @@ sap.ui.define([
                 draggable: true,
                 resizable: true,
                 stretch: false,
+                contentWidth:"30rem",
+                icon:"sap-icon://download",
+                escapeHandler: function (escapeHandler) {
+                    debugger;
+                    if (this._bHasUnsavedChanges) {
+                        // block ESC
+                        oPromise.resolve();
+                    } else {
+                       // this.close();
+                        oPromise.resolve();
+                    }
+                }.bind(this),
                 titleAlignment: "Center",
                 content: [
                     new sap.m.VBox({
@@ -81,7 +93,7 @@ sap.ui.define([
                         items:[
                     new sap.m.Label(),
                     new sap.m.Label({
-                        text: "Please Choose the option below what Data you want Download"
+                        text: "Please Choose the option below what Data you want Download..."
                     }),
                     new sap.m.Label(),
                     new sap.m.RadioButton({
