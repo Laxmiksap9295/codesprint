@@ -372,7 +372,8 @@ sap.ui.define([
             //         console.log("Response:", xhr.responseText);
             //     }
             // });
-
+            var oBusyDialog = new BusyDialog();
+            oBusyDialog.open();
             var Data_CFM =
                 [{
                     "Description": "Brazil"
@@ -382,21 +383,29 @@ sap.ui.define([
                 "url": "https://App-Matcher-daring-buffalo-bv.cfapps.us10-001.hana.ondemand.com/match_app",
                 "method": "POST",
                 "headers": {
-                    "Content-Type": "text/plain",
+                    "Content-Type": "application/json",
                 },
                 "data": JSON.stringify([
                     {
-                        "Description": "Brazil"
+                        "Description": "Intercompany Report",
                     }
                 ]),
             };
-
+            var that = this;
             jQuery.ajax(settings).done(function (response) {
                 debugger;
                 console.log("Success:", response);
-            }).error(function(oerror){
+                oBusyDialog.close();
+                if(response){
+                     that.getView().byId("idReserveTicketTitle").setText("app_name:" +" "+ response.app_name);
+                    that.getView().byId("idReserveTicketSimilarity").setText("similarity:" +" "+ response.similarity);
+                    that.getView().byId("idReserveTicketSimilarityPer").setText("similarity_percent:" +" "+ response.similarity_percent);
+                }
+            }).fail(function(oerror,oResponce){
                 debugger;
+                oBusyDialog.close();
                 console.log("Failed:", oerror);
+                MessageBox.error(oerror.statusText);
             });
             
         }
