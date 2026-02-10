@@ -387,7 +387,7 @@ sap.ui.define([
                 },
                 "data": JSON.stringify([
                     {
-                        "Description": "Intercompany Report",
+                        "Description": "Material Consumption",
                     }
                 ]),
             };
@@ -396,15 +396,18 @@ sap.ui.define([
                 debugger;
                 console.log("Success:", response);
                 oBusyDialog.close();
-                if(response){
-                     that.getView().byId("idReserveTicketTitle").setText("app_name:" +" "+ response.app_name);
-                    that.getView().byId("idReserveTicketSimilarity").setText("similarity:" +" "+ response.similarity);
-                    that.getView().byId("idReserveTicketSimilarityPer").setText("similarity_percent:" +" "+ response.similarity_percent);
+                if (response) {
+                    that.getView().byId("idReserveTicketTitle").setText("app_name:" + " " + response.app_name);
+                    that.getView().byId("idReserveTicketSimilarity").setText("similarity:" + " " + response.similarity);
+                    that.getView().byId("idReserveTicketSimilarityPer").setText("similarity_percent:" + " " + response.similarity_percent);
                 }
-            }).fail(function(oerror,oResponce){
+            }).fail(function (oerror, oResponce) {
                 debugger;
                 oBusyDialog.close();
                 console.log("Failed:", oerror);
+                that.getView().byId("idReserveTicketTitle").setText("app_name:" + " " + oerror.statusText);
+                that.getView().byId("idReserveTicketSimilarity").setText("similarity:" + " " + oerror.statusText);
+                that.getView().byId("idReserveTicketSimilarityPer").setText("similarity_percent:" + " " + oerror.statusText);
                 MessageBox.error(oerror.statusText);
             });
             
