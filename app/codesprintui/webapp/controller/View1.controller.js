@@ -387,7 +387,7 @@ sap.ui.define([
                 },
                 "data": JSON.stringify([
                     {
-                        "Description": "Material Consumption",
+                        "Description": "MM Reports",
                     }
                 ]),
             };
